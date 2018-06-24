@@ -19,8 +19,8 @@ Install requirements using
 * Create a reddit API Token [here](https://www.reddit.com/prefs/apps/). Note down the client id under the app name, and client secret in the 'edit' option.
 * Create a telegram bot using [@botfather](https://telegram.me/botfather). Note down the HTTP API Token.
 * Create a channel in telegram. Note the @username of the channel.
-* Add all the tokens into the app.
-* Add all the subreddits you want into the app.
+* Add all the tokens into settings.py
+* Add all the subreddits you want into settings.py
 * Run the app. `python app.py`
 
 ## How to host

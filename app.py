@@ -2,41 +2,11 @@ import praw
 import requests
 from random import shuffle
 from datetime import datetime
-
-# REDDIT
-
-CLIENT_ID = "--TOKEN HERE--"
-CLIENT_SECRET = "--TOKEN HERE--"
-USER_AGENT = "crawling my favorite subreddits" # can be anything
-
-
-subreddits = [
-                "all",
-                "movies",
-                "funny"
-            ] # add your subreddits here
-
-
-
-# TELEGRAM
-
-BOT_TOKEN = "--TOKEN HERE--"
-CHANNEL = "--CHANNEL NAME HERE--"
-URL = "https://api.telegram.org/bot"+BOT_TOKEN+"/send"
-
-
-reddit = praw.Reddit(client_id=CLIENT_ID,
-                     client_secret=CLIENT_SECRET,
-                     user_agent=USER_AGENT)
+from settings import *
 
 def getNewPost(subr):
 	for subs in reddit.subreddit(subr).top(time_filter="hour",limit=1):
 		return subs
-
-data = []
-for sub in subreddits:
-	data.append(getNewPost(sub))
-
 
 def isImageLink(link):
 	if link.endswith("png") or link.endswith("jpg") or link.endswith("jpeg") or link.endswith("gif"):
@@ -80,7 +50,22 @@ def post2Telegram(data):
 	print(r.text)
 	print(r.status_code)
 
-shuffle(data) # shuffles order of posts
 
-for d in data:
-	post2Telegram(d)
+
+
+
+def main():
+	reddit = praw.Reddit(client_id=CLIENT_ID,
+                     client_secret=CLIENT_SECRET,
+                     user_agent=USER_AGENT)
+
+	data = []
+	for sub in subreddits:
+		data.append(getNewPost(sub))
+
+	shuffle(data) # shuffles order of posts
+
+	for d in data:
+		post2Telegram(d)
+
+main()
