@@ -35,9 +35,9 @@ Install requirements using
 
 ```
 Dyno Size : Free
-Frequency : Hourly
+Frequency : Daily
 command : python app.py
 ```
 * Enjoy your private reddit channel
 
-[ Currently the code is designed to fetch 'top post of the hour with upvotes > 10' ]
+[ Currently the code is designed to fetch 'top 5 posts of the day with upvotes > 10' ]

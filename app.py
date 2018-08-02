@@ -5,8 +5,10 @@ from datetime import datetime
 from settings import *
 
 def getNewPost(subr):
-	for subs in reddit.subreddit(subr).top(time_filter="hour",limit=1):
-		return subs
+	many_subs = []
+	for subs in reddit.subreddit(subr).top(time_filter="day",limit=POST_COUNT):
+		many_subs.append(subs)
+	return many_subs
 
 def isImageLink(link):
 	if link.endswith("png") or link.endswith("jpg") or link.endswith("jpeg") or link.endswith("gif"):
@@ -31,8 +33,8 @@ def post2Telegram(data):
 
 	dif_hours = dif.seconds/60/60
 
-	if dif_hours > 1 or data.score < 10:
-		return
+	if dif_hours > 24 or data.score < 10:
+			return
 
 	if isImageLink(data.url):
 		if str(data.url).endswith("gif"):
@@ -49,9 +51,6 @@ def post2Telegram(data):
 	r = requests.post(URL+dataType, data=payload)
 	print(r.text)
 	print(r.status_code)
-
-
-
 
 
 def main():
