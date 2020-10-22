@@ -1,3 +1,6 @@
 praw
 requests
-
+flask
+python-dotenv
+pymongo
+loguru
